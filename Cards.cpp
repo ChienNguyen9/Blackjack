@@ -4,6 +4,8 @@
 
 // give cards values
 Cards::Cards(){
+  randomSuit = 1;
+  randomNumber = 1;
   for(int i = 0; i < 13; i++){
     if(i > 9){
       hearts[i] = 10;
@@ -33,10 +35,33 @@ Cards::Cards(){
     }
   }
 }
-// returns random cards
+// returns random cards and cards cannot be the same
 int Cards::CardsDealt(){
-
-  return 0;
+  randomSuit = rand()%4+1;
+  randomNumber = rand()%12;
+  switch(randomSuit){
+    // hearts
+    case 1:
+      return hearts[randomNumber];
+      break;
+    // diamonds
+    case 2:
+      return diamonds[randomNumber];
+      break;
+    // spades
+    case 3:
+      return spades[randomNumber];
+      break;
+    // clubs
+    case 4:
+      return clubs[randomNumber];
+      break;
+    // something went wrong
+    default:
+      std::cout << "Card is missing!!!";
+      return 0;
+      break;
+  }
 }
 // tests if cards has actual value
 void Cards::CardsValue(){
