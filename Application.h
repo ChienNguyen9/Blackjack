@@ -5,6 +5,7 @@
 class Application{
 public:
   Application();
+  void GameRun();
 private:
 
 };
