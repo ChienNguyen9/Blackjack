@@ -7,6 +7,7 @@ class Dealer{
 public:
   Dealer();
   int DefaultDealerCards();
+  int AutoDraw(int newDealerValue);
 private:
   int cardOne;
   int cardTwo;

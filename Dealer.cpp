@@ -21,3 +21,10 @@ int Dealer::DefaultDealerCards(){
     }
   }
 }
+
+int Dealer::AutoDraw(int newDealerValue){
+  while(dealerValue < 16){
+    dealerValue += cards.CardsDealt();
+  }
+  return dealerValue;
+}
