@@ -1,11 +1,13 @@
+#include "Cards.h"
 #include <ctime>
 #include <cstdlib>
-#include "Cards.h"
 
 // give cards values
 Cards::Cards(){
   randomSuit = 1;
   randomNumber = 1;
+  temporary = 0;
+  temporaryNumber = 0;
   for(int i = 0; i < 13; i++){
     if(i > 9){
       hearts[i] = 10;
@@ -37,24 +39,43 @@ Cards::Cards(){
 }
 // returns random cards and cards cannot be the same
 int Cards::CardsDealt(){
-  randomSuit = rand()%4+1;
-  randomNumber = rand()%12;
-  switch(randomSuit){
+  temporaryNumber = LuckyNumber();
+  switch(LuckySuit()){
     // hearts
     case 1:
-      return hearts[randomNumber];
+      if(hearts[temporaryNumber] == 0){
+        CardsDealt();
+      }
+      temporary = hearts[temporaryNumber];
+      hearts[temporaryNumber] = 0;
+      return temporary;
       break;
     // diamonds
     case 2:
-      return diamonds[randomNumber];
+      if(diamonds[temporaryNumber] == 0){
+        CardsDealt();
+      }
+      temporary = diamonds[temporaryNumber];
+      diamonds[temporaryNumber] = 0;
+      return temporary;
       break;
     // spades
     case 3:
-      return spades[randomNumber];
+      if(spades[temporaryNumber] == 0){
+        CardsDealt();
+      }
+      temporary = spades[temporaryNumber];
+      spades[temporaryNumber] = 0;
+      return temporary;
       break;
     // clubs
     case 4:
-      return clubs[randomNumber];
+      if(clubs[temporaryNumber] == 0){
+        CardsDealt();
+      }
+      temporary = clubs[temporaryNumber];
+      clubs[temporaryNumber] = 0;
+      return temporary;
       break;
     // something went wrong
     default:
@@ -71,4 +92,45 @@ void Cards::CardsValue(){
     std::cout << spades[i] << "-spades ";
     std::cout << clubs[i] << "-clubs\n";
   }
+}
+
+void Cards::ResetCards(){
+  for(int i = 0; i < 13; i++){
+    if(i > 9){
+      hearts[i] = 10;
+    }else{
+      hearts[i] = i+1;
+    }
+  }
+  for(int i = 0; i < 13; i++){
+    if(i > 9){
+      diamonds[i] = 10;
+    }else{
+      diamonds[i] = i+1;
+    }
+  }
+  for(int i = 0; i < 13; i++){
+    if(i > 9){
+      spades[i] = 10;
+    }else{
+      spades[i] = i+1;
+    }
+  }
+  for(int i = 0; i < 13; i++){
+    if(i > 9){
+      clubs[i] = 10;
+    }else{
+      clubs[i] = i+1;
+    }
+  }
+}
+// generate random Suit
+int Cards::LuckySuit(){
+  randomSuit = rand()%4+1;
+  return randomSuit;
+}
+// generate random cards
+int Cards::LuckyNumber(){
+  randomNumber = rand()%13;
+  return randomNumber;
 }
