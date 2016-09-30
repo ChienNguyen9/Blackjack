@@ -7,6 +7,7 @@ class Player{
 public:
   Player();
   int DefaultPlayerCards();
+  int DrawCard();
 private:
   int cardOne;
   int cardTwo;

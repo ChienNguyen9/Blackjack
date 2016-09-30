@@ -21,3 +21,7 @@ int Player::DefaultPlayerCards(){
     }
   }
 }
+
+int Player::DrawCard(){
+  return cards.CardsDealt();
+}
